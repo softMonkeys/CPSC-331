@@ -1,0 +1,162 @@
+CPSC 331 Assignment#4
+ 
+Methodology:
+        	The Java program will address the problem of detecting the most and least popular vertices in an undirected graph G.
+First, the program will ask user for her/his input for a positive integer which defines how many vertices |V| and undirected graph G has and the full path including full name(with extension) of a CSV text file that holds the information of the Edges set of the undirected graph G. The numbering of the vertices starts with number zero. All vertices numbered from 0 to |V| - 1 exist in the undirected graph G. In my program, I assume that the number of vertices is smaller than and equal to 32768.
+Second, after the program gets these two variables, it will pass them into a function called “read”. This method will take the 2 user inputs which are directory of the text file and numbers of vertices. The method starts with initializing a 2 dimensional list for storing the adjacency list, and then, the method reads the text file by using bufferReader line by line and separate the integers between the comma. Then it saves the number into the correct index of the 2 dimensional list and print it out on console. In the end, it returns the 2 dimensional list which has all the adjacency lists in it. 
+Third, after it has the Edges set of the undirected graph G printed out, the program will find the most popular vertices. It passes the 2 dimensional list into a function called “MPV”.  This method returns nothing, it will take the 2 dimensional list and calculates the most popular vertices. It starts with a temporary variable which represents the largest list as the first index of the list, and the for loop below will check if the next index of the list larger than the temporary variable. If yes, the temporary variable will be overwritten. The final temporary variable minus one will give us the number of neighbors for most popular vertices. Then it will find the most popular vertices. In order to do so, the program will loop through the entire 2 dimensional list again to check the list which has the same length as the final temporary variable. If so, the list(s) would be the most popular vertices. The LPV will be printed on console eventually.
+Fourth, the program will find the least popular vertice somehow the algorithm is very similar as finding most popular vertice. It passes the 2 dimensional list into a method called “LPV”. This method returns nothing, it will take the 2 dimensional list and calculates the least popular vertices. It starts with a temporary variable which represents the smallest list as the first index of the list, and the for loop below will check if the next index of the list smaller than the temporary variable. If yes, the temporary variable will be overwritten. The final temporary variable minus one will give us the number of neighbors for least popular vertices. Then it will find the least popular vertices. In order to do so, the program will loop through the entire 2 dimensional list again to check the list which has the same length as the final temporary variable. If so, the list(s) would be the least popular vertices. The LPV will be printed on console eventually.
+Fifth, the program will create adjacency matrix by calling method called “matrix”. This method will take the 2 user inputs and 2 dimensional array which are directory of the text file and numbers of vertices and 2-D List. The method starts with initializing a 2 dimensional string array for storing the adjacency matrix, and then, the method reads the text file by using bufferReader line by line and separate the integers between the comma. It writes 1 into the index where the two number table[i][j] is, then the rest part of the 2-D array would be 0. In the end, it returns the 2 dimensional string array.
+Lastly, after we have both adjacency list saved in a 2-D list and adjacency matrix saved in a 2-D array. The program now will call both methods “writeList” and “writeMatrix” to create files “AdjacencyList.CSV” and “AdjacencyMatrix.CSV” in the same folder where the CSV text files exist.
+ 
+Correctness of algorithm and termination:
+
+
+Part 1: Read the text file
+{P}
+1. user has input a valid directory for their text file rather than it is going to be caught by the exception.
+	2. user has input a valid vertices which is a positive integer bigger than 0.
+
+
+0 < vertices
+{Q}
+1. This method will take the 2 user inputs which are directory of the text file and numbers of vertices. The method starts with initializing a 2 dimensional list for storing the adjacency list, and then, the method reads the text file by using bufferReader line by line and separate the integers between the comma. Then it saves the number into the correct index of the 2 dimensional list and print it out on console. In the end, it returns the 2 dimensional array.
+
+
+For(i: vertices){p}
+End{q}
+	while((line = br.readLine()) != null){p}
+ 	if(Integer.parseInt(numbers[0]) < vertices 
+&& Integer.parseInt(numbers[1]) < vertices)
+else
+	End{q}
+
+
+Therefore the loop will run (ith + 1)+(rows of the file + 1) times since there are no loop variants that affect the loop whatsoever and the preconditions and postconditions are met since every {P} corresponds to a {Q}
+
+
+Part 2: Most popular vertices 
+{P}
+1. 2 dimensional List is a valid 2 dimensional List.
+{Q}
+1. This method will take the 2 dimensional list and calculates the most popular vertices. The method will return nothing.
+ 
+For(a: vertices.size()){p}
+		if(vertices.get(i).size() > largest)
+End{q}
+For(i: vertices.size()){p}
+		if(vertices.get(i).size() == largest)
+			For(j: vertices.get(i).size()){p}
+				if(j == vertices.get(i).size() - 1)
+				else
+        		End{q}	
+End{q}
+ 
+{P} S {Q} since no matter what occurs a statement ill always happening concatenating to the string which is our Q and the for loop will eventually end when there are no more items in the string.
+Therefore the loop will run (ath + 1)+(ith + 1)*(jth + 1) times since there are no loop variants that affect the loop whatsoever and the preconditions and postconditions are met since every {P} corresponds to a {Q}
+ 
+Part 3: Least popular vertices
+        	{P}
+1. 2 dimensional List is a valid 2 dimensional List.
+{Q}
+	1. This method will take the 2 dimensional list and calculates the least popular vertices. The method will return nothing.
+
+
+For(a: vertices.size()){p}
+		if(vertices.get(i).size() > largest)
+End{q}
+For(i: vertices.size()){p}
+		if(vertices.get(i).size() == largest)
+			For(j: vertices.get(i).size()){p}
+				if(j == vertices.get(i).size() - 1)
+				else
+        		End{q}	
+End{q}
+ 
+{P} S {Q} since no matter what occurs a statement ill always happening concatenating to the string which is our Q and the for loop will eventually end when there are no more items in the string.
+Therefore the loop will run (ath + 1)+(ith + 1)*(jth + 1) times since there are no loop variants that affect the loop whatsoever and the preconditions and postconditions are met since every {P} corresponds to a {Q}
+
+
+Part 4: Write adjacency list
+{P}
+1. 2 dimensional array "table" is a valid array
+{Q}
+1. This method will take the 2 dimensional array which been created in the matrix method and print the adjacency matrix in a file called "AdjacencyList.CSV". The method returns nothing.
+
+
+For(i:vertices.size()){p}
+		For(j:vertices.get(i).size()){p}
+End{q}
+	End{q}
+
+
+{P} S {Q} since no matter what occurs a statement ill always happening concatenating to the string which is our Q and the for loop will eventually end when there are no more items in the string.
+Therefore the loop will run (ith + 1)*(jth + 1) times since there are no loop variants that affect the loop whatsoever and the preconditions and postconditions are met since every {P} corresponds to a {Q}
+
+
+Part 5: Create a matrix 
+{P}
+1. user has input a valid directory for their text file rather than it is going to be caught by the exception.
+2. 2 dimensional List is a valid list
+3. user has input a valid vertices which is a positive integer bigger than 0.
+
+
+0 < vertices
+{Q}
+1. This method will take the 2 user inputs and 2 dimensional array which are directory of the text file and numbers of vertices and 2-D List. The method starts with initializing a 2 dimensional string array for storing the adjacency matrix, and then, the method reads the text file by using bufferReader line by line and separate the integers between the comma. It writes 1 into the index where the two number table[i][j] is, then the rest part of the 2-D array would be 0. In the end, it returns the 2 dimensional string array.
+
+
+For(a: vertices.size()){p}
+		if(vertices.get(i).size() > largest)
+End{q}
+For(i: vertices.size()){p}
+		if(vertices.get(i).size() == largest)
+			For(j: vertices.get(i).size()){p}
+				if(j == vertices.get(i).size() - 1)
+				else
+        		End{q}	
+End{q}
+	
+{P} S {Q} since no matter what occurs a statement ill always happening concatenating to the string which is our Q and the for loop will eventually end when there are no more items in the string.
+Therefore the loop will run (ath + 1)+(ith + 1)*(jth + 1) times since there are no loop variants that affect the loop whatsoever and the preconditions and postconditions are met since every {P} corresponds to a {Q}
+
+
+Part 6: Write matrix
+{P}
+1. 2 dimensional array "table" is a valid array
+{Q}
+1. This method will take the 2 dimensional array which been created in the matrix method and print the adjacency matrix in a file called "AdjacencyMatrix.CSV". The method returns nothing.
+
+
+	For(i:vertices.size()){p}
+		For(j:vertices.get(i).size()){p}
+End{q}
+	End{q}
+
+
+Therefore the loop will run (ith + 1)*(jth + 1) times since there are no loop variants that affect the loop whatsoever and the preconditions and postconditions are met since every {P} corresponds to a {Q}.
+ 
+WORST CASE SCENARIOS:
+Part 1: Read the text file
+Worst case is vertices+rows of the file
+
+
+Part 2: Most popular vertices 
+	Worst case is vertices.size()+vertices.size()*vertices.get(i).size()
+
+
+Part 3: Least popular vertices
+	 Worst case is vertices.size()+vertices.size()*vertices.get(i).size()
+
+
+Part 4: Write adjacency list
+	Worst case is vertices.size()*vertices.get(i).size()
+
+
+Part 5: Create a matrix 
+	Worst case is (table.length-1)+rows
+
+
+Part 6: Write matrix
+	Worst case is table.length*table[i].length
+
